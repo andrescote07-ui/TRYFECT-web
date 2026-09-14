@@ -1,0 +1,67 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "site"
+    label: "Contenido del Sitio"
+    files:
+      - name: "home"
+        label: "Página Principal"
+        file: "index.html"
+        format: "html"
+        fields:
+          - { label: "Nombre del sitio", name: "site_name", widget: "string", default: "TRYFECT" }
+          - { label: "Badge del Hero", name: "hero_badge", widget: "string", default: "ESTUDIO DE INGENIERÍA MULTIMEDIA" }
+          - { label: "Título Hero - Parte 1", name: "hero_title_1", widget: "string", default: "Creamos" }
+          - { label: "Título Hero - Parte 2 (destacado)", name: "hero_title_2", widget: "string", default: "experiencias" }
+          - { label: "Título Hero - Parte 3", name: "hero_title_3", widget: "string", default: "interactivas que" }
+          - { label: "Título Hero - Parte 4 (destacado)", name: "hero_title_4", widget: "string", default: "conectan" }
+          - { label: "Descripción Hero", name: "hero_description", widget: "text" }
+          - { label: "Botón CTA 1", name: "hero_cta_1", widget: "string" }
+          - { label: "Botón CTA 2", name: "hero_cta_2", widget: "string" }
+          
+          - { label: "Icono About", name: "about_icon", widget: "string", default: "🎮" }
+          - { label: "Tag About", name: "about_tag", widget: "string" }
+          - { label: "Título About", name: "about_title", widget: "string" }
+          - { label: "Descripción About", name: "about_description", widget: "text" }
+          - { label: "Título Misión", name: "mission_title", widget: "string" }
+          - { label: "Texto Misión", name: "mission_text", widget: "text" }
+          - { label: "Título Visión", name: "vision_title", widget: "string" }
+          - { label: "Texto Visión", name: "vision_text", widget: "text" }
+          
+          - { label: "Tag Videojuego", name: "game_tag", widget: "string" }
+          - { label: "Título Videojuego", name: "game_title", widget: "string" }
+          - { label: "Subtítulo Videojuego", name: "game_subtitle", widget: "string" }
+          - { label: "Imagen Portada Juego", name: "game_cover", widget: "image" }
+          - { label: "Label 'Sobre el juego'", name: "game_about_label", widget: "string" }
+          - { label: "Descripción Juego", name: "game_description", widget: "text" }
+          - { label: "Género", name: "game_genre", widget: "string" }
+          - { label: "Plataforma", name: "game_platform", widget: "string" }
+          - { label: "Estado", name: "game_status", widget: "string" }
+          - { label: "Lanzamiento", name: "game_release", widget: "string" }
+          
+          - { label: "Tag Equipo", name: "team_tag", widget: "string" }
+          - { label: "Título Equipo", name: "team_title", widget: "string" }
+          
+          - { label: "Foto Miembro 1", name: "member_1_photo", widget: "image" }
+          - { label: "Nombre Miembro 1", name: "member_1_name", widget: "string" }
+          - { label: "Rol Miembro 1", name: "member_1_role", widget: "string" }
+          - { label: "Bio Miembro 1", name: "member_1_bio", widget: "text" }
+          
+          - { label: "Foto Miembro 2", name: "member_2_photo", widget: "image" }
+          - { label: "Nombre Miembro 2", name: "member_2_name", widget: "string" }
+          - { label: "Rol Miembro 2", name: "member_2_role", widget: "string" }
+          - { label: "Bio Miembro 2", name: "member_2_bio", widget: "text" }
+          
+          - { label: "Foto Miembro 3", name: "member_3_photo", widget: "image" }
+          - { label: "Nombre Miembro 3", name: "member_3_name", widget: "string" }
+          - { label: "Rol Miembro 3", name: "member_3_role", widget: "string" }
+          - { label: "Bio Miembro 3", name: "member_3_bio", widget: "text" }
+          
+          - { label: "Descripción Footer", name: "footer_description", widget: "text" }
+          - { label: "Email Contacto", name: "contact_email", widget: "string" }
+          - { label: "Teléfono Contacto", name: "contact_phone", widget: "string" }

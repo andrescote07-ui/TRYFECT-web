@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRYFECT | Ingeniería Multimedia</title>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.0/index.min.css" rel="stylesheet">
+<style>
+  :root {
+    --white-fog: #F7FAFC;
+    --gray-stone: #4A5568;
+    --navy: #1F3A5A;
+    --sapphire: #0056D2;
+    --gold: #EDCA4C;
+    --navy-dark: #152840;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--white-fog);
+    color: var(--gray-stone);
+    line-height: 1.6;
+  }
+  h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; color: var(--navy); }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* HEADER */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(31, 58, 90, 0.95);
+    backdrop-filter: blur(12px);
+  }
+  .nav-wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.5rem; color: var(--white-fog);
+    letter-spacing: 2px;
+  }
+  .logo svg { width: 38px; height: 38px; }
+  .logo span { color: var(--gold); }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav a { color: var(--white-fog); font-weight: 500; transition: color 0.3s; }
+  nav a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    display: flex; align-items: center; padding: 120px 0 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(0, 86, 210, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(237, 202, 76, 0.15) 0%, transparent 50%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    max-width: 900px; margin: 0 auto; padding: 0 24px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(237, 202, 76, 0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold); padding: 8px 20px; border-radius: 30px;
+    font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    color: var(--white-fog); font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800; line-height: 1.1; margin-bottom: 20px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(90deg, var(--gold) 0%, #f5d976 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    color: rgba(247, 250, 252, 0.8); font-size: 1.15rem;
+    max-width: 650px; margin: 0 auto 36px;
+  }
+  .btn {
+    padding: 14px 32px; border-radius: 8px; font-weight: 600;
+    font-size: 0.95rem; cursor: pointer; transition: all 0.3s;
+    border: none; display: inline-flex; align-items: center; gap: 8px;
+    margin: 0 8px;
+  }
+  .btn-primary { background: var(--sapphire); color: white; }
+  .btn-primary:hover { background: #0046ad; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--white-fog);
+    border: 2px solid rgba(247, 250, 252, 0.3);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* SECTIONS */
+  section { padding: 100px 0; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    display: inline-block; color: var(--sapphire); font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+  .section-header p { max-width: 650px; margin: 0 auto; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-visual {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--navy), var(--sapphire));
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(31, 58, 90, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem; color: var(--gold);
+  }
+  .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+  .mv-card {
+    padding: 24px; border-radius: 12px; margin-top: 20px;
+    background: white; border-left: 4px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .mv-card h4 { color: var(--sapphire); margin-bottom: 8px; }
+
+  /* GAME */
+  .game-section { background: linear-gradient(180deg, var(--white-fog) 0%, #e8eef5 100%); }
+  .game-showcase {
+    background: var(--navy);
+    border-radius: 24px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(31, 58, 90, 0.3);
+  }
+  .game-hero-art {
+    aspect-ratio: 16/9; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #0a1929 0%, #1F3A5A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .game-hero-art img { width: 100%; height: 100%; object-fit: cover; }
+  .game-title-overlay {
+    position: absolute; bottom: 40px; left: 40px;
+  }
+  .game-title-overlay h3 {
+    color: var(--white-fog); font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900; text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .game-title-overlay h3 span { color: var(--gold); }
+  .game-info { padding: 50px 40px; }
+  .game-info-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; }
+  .game-info h4 { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .game-info p { color: rgba(247, 250, 252, 0.85); margin-bottom: 20px; }
+  .game-meta {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(237, 202, 76, 0.2);
+    border-radius: 16px; padding: 28px;
+  }
+  .meta-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .meta-item:last-child { border-bottom: none; }
+  .meta-item .label { color: var(--gold); font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; }
+  .meta-item .value { color: var(--white-fog); font-weight: 600; }
+
+  /* TEAM */
+  .team-section { background: linear-gradient(180deg, #e8eef5 0%, var(--white-fog) 100%); }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .team-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .team-avatar {
+    aspect-ratio: 1; overflow: hidden;
+    background: linear-gradient(135deg, var(--navy), var(--sapphire));
+  }
+  .team-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .team-info { padding: 28px 24px; }
+  .team-info h3 { font-size: 1.3rem; margin-bottom: 4px; }
+  .team-role { color: var(--sapphire); font-weight: 600; font-size: 0.9rem; margin-bottom: 14px; }
+  .team-bio { font-size: 0.9rem; margin-bottom: 16px; }
+  .skill-tag {
+    display: inline-block;
+    background: rgba(237, 202, 76, 0.15); color: var(--navy);
+    padding: 4px 10px; border-radius: 10px; font-size: 0.75rem;
+    font-weight: 600; margin: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy-dark); color: rgba(247, 250, 252, 0.7);
+    padding: 60px 0 30px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-col h4 { color: var(--gold); font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom {
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center; font-size: 0.85rem;
+  }
+  .footer-bottom span { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    .about-grid, .game-info-grid, .footer-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 40 40" fill="none">
+        <rect x="2" y="2" width="36" height="36" rx="8" fill="#EDCA4C"/>
+        <path d="M10 12 L30 12 L30 16 L22 16 L22 30 L18 30 L18 16 L10 16 Z" fill="#1F3A5A"/>
+      </svg>
+      <span data-cms-bind="#site_name">TRYFECT</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about">Nosotros</a></li>
+        <li><a href="#game">Videojuego</a></li>
+        <li><a href="#team">Equipo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span data-cms-bind="#hero_badge">ESTUDIO DE INGENIERÍA MULTIMEDIA</span>
+    </div>
+    <h1>
+      <span data-cms-bind="#hero_title_1">Creamos</span>
+      <span class="highlight" data-cms-bind="#hero_title_2">experiencias</span><br>
+      <span data-cms-bind="#hero_title_3">interactivas que</span>
+      <span class="highlight" data-cms-bind="#hero_title_4">conectan</span>
+    </h1>
+    <p data-cms-bind="#hero_description">
+      Fusionamos arte, código y tecnología para dar vida a mundos virtuales. Videojuegos, ilustración y soluciones multimedia de alto impacto.
+    </p>
+    <div>
+      <a href="#game" class="btn btn-primary" data-cms-bind="#hero_cta_1">Conoce Law&Street →</a>
+      <a href="#about" class="btn btn-outline" data-cms-bind="#hero_cta_2">Sobre nosotros</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <span data-cms-bind="#about_icon">🎮</span>
+      </div>
+      <div class="about-text">
+        <span class="section-tag" data-cms-bind="#about_tag">Sobre Nosotros</span>
+        <h2 data-cms-bind="#about_title">Arte, código y tecnología en movimiento</h2>
+        <p data-cms-bind="#about_description">
+          Somos un colectivo multidisciplinario de estudiantes de Ingeniería Multimedia apasionados por transformar la tecnología y el arte en experiencias interactivas inolvidables.
+        </p>
+        <div class="mv-card">
+          <h4 data-cms-bind="#mission_title">🎯 Misión</h4>
+          <p data-cms-bind="#mission_text">Desarrollar experiencias interactivas y soluciones de ingeniería multimedia de alta calidad que fusionen la creatividad artística con la precisión técnica.</p>
+        </div>
+        <div class="mv-card">
+          <h4 data-cms-bind="#vision_title">👁 Visión</h4>
+          <p data-cms-bind="#vision_text">Consolidarnos como un estudio universitario de referencia en ingeniería multimedia y desarrollo de videojuegos a nivel global.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME -->
+<section class="game-section" id="game">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-cms-bind="#game_tag">Nuestro Videojuego</span>
+      <h2 data-cms-bind="#game_title">Law&Street</h2>
+      <p data-cms-bind="#game_subtitle">Justicia, venganza y acción en las calles de Cúcuta</p>
+    </div>
+
+    <div class="game-showcase">
+      <div class="game-hero-art">
+        <img src="" data-cms-bind="#game_cover" alt="Law&Street Cover">
+        <div class="game-title-overlay">
+          <h3>LAW<span>&</span>STREET</h3>
+        </div>
+      </div>
+
+      <div class="game-info">
+        <div class="game-info-grid">
+          <div>
+            <h4 data-cms-bind="#game_about_label">Sobre el juego</h4>
+            <p data-cms-bind="#game_description">
+              Law&Street es un videojuego 2D de acción que te sumerge en las calles de Cúcuta para combatir la delincuencia y los grupos armados. Una historia de justicia y venganza.
+            </p>
+          </div>
+          <div class="game-meta">
+            <div class="meta-item">
+              <div class="label">Género</div>
+              <div class="value" data-cms-bind="#game_genre">Acción 2D</div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Plataforma</div>
+              <div class="value" data-cms-bind="#game_platform">PC</div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Estado</div>
+              <div class="value" data-cms-bind="#game_status">En desarrollo</div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Lanzamiento</div>
+              <div class="value" data-cms-bind="#game_release">Noviembre 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-cms-bind="#team_tag">El Equipo</span>
+      <h2 data-cms-bind="#team_title">Las mentes detrás de TRYFECT</h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="" data-cms-bind="#member_1_photo" alt="Andrés Cote">
+        </div>
+        <div class="team-info">
+          <h3 data-cms-bind="#member_1_name">Andrés Felipe Cote Rodriguez</h3>
+          <div class="team-role" data-cms-bind="#member_1_role">Director & Fundador</div>
+          <p class="team-bio" data-cms-bind="#member_1_bio">Propietario, director y alma de la empresa. Lidera la visión técnica y la gestión integral del estudio.</p>
+          <div>
+            <span class="skill-tag">UI/UX</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Liderazgo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="" data-cms-bind="#member_2_photo" alt="Ever Rodriguez">
+        </div>
+        <div class="team-info">
+          <h3 data-cms-bind="#member_2_name">Ever Dufay Rodriguez Marquez</h3>
+          <div class="team-role" data-cms-bind="#member_2_role">Desarrollador</div>
+          <p class="team-bio" data-cms-bind="#member_2_bio">Programador de mecánicas de juego, optimización de código e integración de físicas en motores gráficos.</p>
+          <div>
+            <span class="skill-tag">Unity</span>
+            <span class="skill-tag">Unreal</span>
+            <span class="skill-tag">Scripting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="" data-cms-bind="#member_3_photo" alt="Neydder Romero">
+        </div>
+        <div class="team-info">
+          <h3 data-cms-bind="#member_3_name">Neydder Esteban Romero Sanchez</h3>
+          <div class="team-role" data-cms-bind="#member_3_role">Artista 3D / Diseñador</div>
+          <p class="team-bio" data-cms-bind="#member_3_bio">Especialista en modelado 3D/2D, texturizado, animación de personajes y diseño de escenarios.</p>
+          <div>
+            <span class="skill-tag">3D</span>
+            <span class="skill-tag">Animación</span>
+            <span class="skill-tag">Concept Art</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo">
+          <svg viewBox="0 0 40 40" fill="none">
+            <rect x="2" y="2" width="36" height="36" rx="8" fill="#EDCA4C"/>
+            <path d="M10 12 L30 12 L30 16 L22 16 L22 30 L18 30 L18 16 L10 16 Z" fill="#1F3A5A"/>
+          </svg>
+          <span>TRYFECT</span>
+        </a>
+        <p style="margin-top: 16px;" data-cms-bind="#footer_description">Estudio universitario de ingeniería multimedia. Creamos experiencias interactivas que conectan arte, código y tecnología.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#game">Videojuego</a></li>
+          <li><a href="#team">Equipo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📧 <a href="mailto:andrescote07@gmail.com" data-cms-bind="#contact_email">andrescote07@gmail.com</a></li>
+          <li>📱 <a href="tel:+573125269706" data-cms-bind="#contact_phone">+57 312 526 9706</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 <span>TRYFECT</span> · Todos los derechos reservados
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
